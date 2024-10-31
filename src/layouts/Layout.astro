@@ -17,8 +17,14 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		
-		<header class="h-20 bg-orange-400"></header>
+		<div class="h-10 bg-slate-500">
+      preheader
+    </div>
+
+		<header class="sticky top-0 h-20 bg-orange-400 ">
+
+    </header>
+
     <menu class="flex bg-slate-400">
       <li>
         <a href="/" class="block hover:bg-white/30 px-4">Inicio</a>
@@ -38,5 +44,19 @@ const { title } = Astro.props;
     </menu>
 		<slot /> 
 	</body>
+
+
+
+
 </html>
+
+<style is:global>
+  @font-face {
+  font-family: 'myfont';
+  src: url('/fonts/RubikWetPaint-Regular.ttf') ;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
 
