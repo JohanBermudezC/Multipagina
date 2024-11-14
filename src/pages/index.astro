@@ -1,13 +1,102 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Multipagina-1">
 	<span class="font-myfont">Hola mundo</span>
 	<div class="text-red-400 text-5xl">Clear</div>
-	<div class="h-[1200px]">
-		texto largo con scroll
+	<div
+		id="btn"
+		class="bg-orange-500 inline-block p-3 rounded-lg cursor-pointer"
+	>
+		presioname
+	</div>
+
+	<div class="embla">
+		<div class="embla__viewport">
+			<div class="embla__container">
+				<div class="embla__slide bg-blue-300">
+					<img src="/img/img1.jpg" alt="">
+				</div>
+				<div class="embla__slide bg-green-300">
+					<img src="/img/p2.jpg" alt="">
+				</div>
+				<div class="embla__slide bg-red-300">
+					<img src="/img/p3.jpg" alt="">
+				</div>
+			</div>
+		</div>
+		<button class="embla__prev">Prev</button>
+		<button class="embla__next">Next</button>
 	</div>
 </Layout>
+<style>
+	.embla {
+		overflow: hidden;
+	}
+	.embla__container {
+		display: flex;
+		align-content: center;
+	}
+	.embla__slide {
+		flex: 0 0 100%;
+		
+		height: max-content;
+	}
+</style>
 
+<script>
+	import JSConfetti from "js-confetti";
+	import EmblaCarousel from "embla-carousel";
+
+	const jsConfetti = new JSConfetti();
+
+	// Grab wrapper nodes
+	const rootNode = document.querySelector(".embla");
+	const viewportNode = rootNode.querySelector(".embla__viewport");
+
+	// Grab button nodes
+	const prevButtonNode = rootNode.querySelector(".embla__prev");
+	const nextButtonNode = rootNode.querySelector(".embla__next");
+
+	const emblaNode = document.querySelector(".embla");
+	const options = { loop: false };
+	const embla = EmblaCarousel(viewportNode, options);
+	// Add click listeners
+	prevButtonNode.addEventListener("click", embla.scrollPrev, false);
+	nextButtonNode.addEventListener("click", embla.scrollNext, false);
+
+	const btn = document.getElementById("btn");
+
+	btn.addEventListener("click", function (e) {
+		const elemen = e.target;
+		//elemen.classList.remove("bg-blue-200")
+		//elemen.classList.add("bg-red-500")
+		elemen.classList.replace("bg-blue-200", "bg-red-600");
+		elemen.innerText = "Ouch";
+
+		const myDiv = document.createElement("div");
+		myDiv.innerText = "Esto es un div creado por js";
+		myDiv.classList.add(
+			"bg-green-500",
+			"p-1",
+			"text-white",
+			"font-semibold",
+			"w-auto",
+			"my-2",
+			"cursor-pointer",
+		);
+
+		myDiv.addEventListener("click", function (e) {
+			e.target.remove();
+		});
+
+		document.body.appendChild(myDiv);
+
+		jsConfetti.addConfetti({
+			emojis: ["🎱"],
+			emojiSize: 100,
+		});
+	});
+	console.log("aca estoy en la consola"), btn;
+</script>
